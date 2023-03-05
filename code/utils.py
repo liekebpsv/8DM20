@@ -4,7 +4,6 @@ import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
 
-# TODO: improve documentation
 class ProstateMRDataset(torch.utils.data.Dataset):
     """Dataset containing prostate MR images. 
 
