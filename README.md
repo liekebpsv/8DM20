@@ -13,7 +13,7 @@ However, for training, it is important to have a large training set, and in prac
 
 ## Task
 
-Train a generative model to create synthetic images and investigate whether the use of these images improves the training of the segmentation model.
+Train a generative model to create synthetic images and investigate whether the use of these images improves the training of the segmentation model. (Think of a suitable metric to compare segmentation performance with and without synthetic data).
 
 ## Practical aspects
 
@@ -30,7 +30,7 @@ Note that the model architecture is designed to process 2D images, i.e., each sl
 
 ### Project
 
-For your project, you are free to build on top of the practical session or to use a different approach. Remember the discussion from the lecture on the limitations of VAEs and potential solutions to this. Since the focus of this course is on generative models, it is recommended to spend time optimising the gernerative model rather than the segmentation model.
+For your project, you are free to build on top of the practical session or to use a different approach. Remember the discussion from the lecture on the limitations of VAEs and potential solutions to this. Since the focus of this part of the course is on generative models, it is recommended to spend time optimising the gernerative model rather than the segmentation model.
 
 This project is more similar to a research project than a course assignment and as such, there is no guarantee that you will get good results from the model. Your project grade is based on your approach, i.e., you will score highly for a good approach that is well motivated in the report. 
 
