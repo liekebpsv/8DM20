@@ -43,6 +43,11 @@ This project is more similar to a research project than a course assignment and 
   - Activate the environment. The command for this depeonds on your operating system. For Mac, `source venv/bin/activate`, for Windows `source venv/Scripts/activate`.
   - You might need to upgrade pip by `pip install --upgrade pip`
   - Install the dependencies from the `requirements.txt` file: `pip install -r requirements.txt`.
+  
+  
+### Consider
+- How to have corresponding labels for your generated images (e.g. conditional generation or using the segmentation model).
+- How to increase the variation in your generated data.
 
 
 
