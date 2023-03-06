@@ -77,10 +77,10 @@ class Encoder(nn.Module):
         """
         ftrs = []  # a list to store features
         for block in self.enc_blocks:
-            # TODO: conv block           
+            x = block(x)        
             # # save features to concatenate to decoder blocks
             ftrs.append(x)
-            # TODO: pooling 
+            x = self.pool(x)
         ftrs.append(x) # save features
         return ftrs
 
