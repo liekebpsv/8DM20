@@ -36,7 +36,10 @@ class Block(nn.Module):
         # a block consists of two convolutional layers
         # with ReLU activations
 
-        # TODO
+        x = self.conv1(x)
+        x = self.relu(x)
+        x = self.conv2(x)
+        x = self.relu(x)
         return x
 
 
