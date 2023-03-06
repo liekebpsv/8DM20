@@ -158,7 +158,7 @@ class VAE(nn.Module):
     enc_chs : tuple 
         holds the number of input channels of each block in the encoder
     dec_chs : tuple 
-        holds the number of input channels of each block in the encoder
+        holds the number of input channels of each block in the decoder
     """
     def __init__(
         self,
