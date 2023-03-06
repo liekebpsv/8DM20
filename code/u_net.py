@@ -176,7 +176,8 @@ class UNet(nn.Module):
         """
 
         # TODO
-        # apply encoding,
-        # then decoding 
+        
+        enc_ftrs = self.encoder(x)
+        # then apply decoding 
         # and output layer
         return out
