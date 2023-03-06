@@ -17,7 +17,6 @@ class Block(nn.Module):
         super().__init__()
         self.conv1 = nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1)
         self.relu = nn.ReLU()
-        
         self.conv2 = nn.Conv2d(out_ch, out_ch, 3, padding=1)
     
     def forward(self, x):
