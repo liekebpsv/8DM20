@@ -83,7 +83,7 @@ class Encoder(nn.Module):
             # # save features to concatenate to decoder blocks
             ftrs.append(x)
 
-            x = pool(x)
+            x = self.pool(x)
         ftrs.append(x) # save features
         return ftrs
 
@@ -178,8 +178,8 @@ class UNet(nn.Module):
             unet output, the logits of the predicted segmentation mask
         """
 
-        # TODO
-        # apply encoding,
-        # then decoding 
-        # and output layer
+        x = self.encoder(x)
+        x = self.decoder(x)
+        out = self.head(x)
+        
         return out
