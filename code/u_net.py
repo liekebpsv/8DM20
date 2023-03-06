@@ -57,7 +57,7 @@ class Encoder(nn.Module):
         super().__init__()
         # convolutional blocks
         self.enc_blocks = nn.ModuleList(
-            # TODO
+            [Block(chs[i], chs[i + 1]) for i in range(len(chs) - 1)]
         )
         # max pooling
         self.pool = # TODO
