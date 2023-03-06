@@ -60,7 +60,7 @@ class Encoder(nn.Module):
             [Block(chs[i], chs[i + 1]) for i in range(len(chs) - 1)]
         )
         # max pooling
-        self.pool = # TODO
+        self.pool = nn.MaxPool2d(2)
 
     def forward(self, x):
         """Performs the forward pass for all blocks in the encoder.
