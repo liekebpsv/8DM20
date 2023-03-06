@@ -62,9 +62,10 @@ valid_dataloader = DataLoader(
 )
 
 # initialise model, optimiser, and loss function
-loss_function = # TODO 
-unet_model = # TODO 
-optimizer = # TODO 
+loss_function = torch.nn.MSELoss
+unet_model = u_net.UNet
+learning_rate = 0.01
+optimizer = torch.optim.Adam(unet_model.parameters(), lr=learning_rate)
 
 minimum_valid_loss = 10  # initial validation loss
 writer = SummaryWriter(log_dir=TENSORBOARD_LOGDIR)  # tensorboard summary

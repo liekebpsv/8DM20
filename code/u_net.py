@@ -36,7 +36,11 @@ class Block(nn.Module):
         # a block consists of two convolutional layers
         # with ReLU activations
 
-        # TODO
+        x = self.conv1(x)
+        x = self.relu(x)
+        x = self.conv2(x)
+        x = self.relu(x)
+        
         return x
 
 
@@ -54,10 +58,10 @@ class Encoder(nn.Module):
         super().__init__()
         # convolutional blocks
         self.enc_blocks = nn.ModuleList(
-            # TODO
-        )
+            [Block(chs[i], chs[i+1]) for i in range(len(chs)-1)]
+            )
         # max pooling
-        self.pool = # TODO
+        self.pool = nn.MaxPool2d(2)#,stride=2)
 
     def forward(self, x):
         """Performs the forward pass for all blocks in the encoder.
@@ -74,10 +78,12 @@ class Encoder(nn.Module):
         """
         ftrs = []  # a list to store features
         for block in self.enc_blocks:
-            # TODO: conv block           
+        
+            x = block(x)
             # # save features to concatenate to decoder blocks
             ftrs.append(x)
-            # TODO: pooling 
+
+            x = pool(x)
         ftrs.append(x) # save features
         return ftrs
 
@@ -97,10 +103,10 @@ class Decoder(nn.Module):
         super().__init__()
         self.chs = chs
         self.upconvs = nn.ModuleList(
-            # TODO: transposed convolution
+            [nn.ConvTranspose2d(chs[i], chs[i+1], kernel_size=2 ) for i in range(len(chs)-1)]
         )
         self.dec_blocks = nn.ModuleList(
-            # TODO: convolutional blocks
+            [Block(chs[i], chs[i+1]) for i in range(len(chs)-1)]
         )
 
     def forward(self, x, encoder_features):
@@ -120,13 +126,13 @@ class Decoder(nn.Module):
         """
         for i in range(len(self.chs) - 1):
             # transposed convolution
-            # TODO
+            x = self.upconvs[i](x)
             # get the features from the corresponding level of the encoder
-            # TODO
+            ftrs = encoder_features[i]
             # concatenate these features to x
-            x = # TODO
+            x = torch.cat(ftrs,x)
             # convolutional block
-            x = # TODO
+            x = self.dec_blocks[i](x)
 
 
         return x
