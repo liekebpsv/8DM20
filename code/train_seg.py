@@ -77,12 +77,25 @@ for epoch in range(N_EPOCHS):
     
     # TODO 
     # training iterations
+    for inputs, labels in tqdm(dataloader,position=0):
+        
+        #zero gradients in each iterations
+        optimizer.zero_grad()
+        outputs = unet_model(inputs)
+        loss = loss_function(outputs, labels.float())
+        loss.backward()
+        current_train_loss += loss.item()
+        optimizer.step()
 
 
     # evaluate validation loss
     with torch.no_grad():
         unet_model.eval()
         # TODO 
+        for inputs, labels in tqdm(valid_dataloader, position=0):
+            outputs = unet_model(inputs)
+            loss = loss_function(outputs, labels.float())
+            current_valid_loss += loss.item()
 
         unet_model.train()
 

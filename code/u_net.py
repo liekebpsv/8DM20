@@ -103,10 +103,10 @@ class Decoder(nn.Module):
         super().__init__()
         self.chs = chs
         self.upconvs = nn.ModuleList(
-            [nn.ConvTranspose2d(chs[i], chs[i+1], kernel_size=2 ) for i in range(len(chs)-1)]
+            [nn.ConvTranspose2d(chs[i], chs[i], 2, 2 ) for i in range(len(chs)-1)]
         )
         self.dec_blocks = nn.ModuleList(
-            [Block(chs[i], chs[i+1]) for i in range(len(chs)-1)]
+            [Block(2*chs[i], chs[i+1]) for i in range(len(chs)-1)]
         )
 
     def forward(self, x, encoder_features):
@@ -128,9 +128,9 @@ class Decoder(nn.Module):
             # transposed convolution
             x = self.upconvs[i](x)
             # get the features from the corresponding level of the encoder
-            ftrs = encoder_features[i]
+            enc_ftrs = encoder_features[i]
             # concatenate these features to x
-            x = torch.cat(ftrs,x)
+            x = torch.cat([x,enc_ftrs], dim=1)
             # convolutional block
             x = self.dec_blocks[i](x)
 
@@ -178,8 +178,10 @@ class UNet(nn.Module):
             unet output, the logits of the predicted segmentation mask
         """
 
-        x = self.encoder(x)
-        x = self.decoder(x)
-        out = self.head(x)
+        enc_ftrs = self.encoder(x)
+        reverse_enc_ftrs = enc_ftrs[::-1]
+        
+        out = self.decoder(reverse_enc_ftrs[0],reverse_enc_ftrs[1:])
+        out = self.head(out)
         
         return out

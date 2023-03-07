@@ -52,10 +52,16 @@ with torch.no_grad():
     output = torch.sigmoid(unet_model(input[np.newaxis, ...]))
     prediction = torch.round(output)
 
-    plt.subplot(131)
-    plt.imshow(input[0], cmap="gray")
-    plt.subplot(132)
-    plt.imshow(target[0])
-    plt.subplot(133)
-    plt.imshow(prediction[0, 0])
+    fig, ax = plt.subplots(1, 3)
+    ax[0].imshow(input[0], cmap="gray")
+    ax[0].set_title("Input")
+    ax[0].axis("off")
+
+    ax[1].imshow(target[0])
+    ax[1].set_title("Ground-truth")
+    ax[1].axis("off")
+
+    ax[2].imshow(prediction[0, 0])
+    ax[2].set_title("Prediction")
+    ax[2].axis("off")
     plt.show()
